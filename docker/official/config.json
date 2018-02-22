@@ -5,44 +5,22 @@
         "loglevel": "warning"
     },
     "inbound": {
-        "port": 10086,
+        "port": 2332,
         "protocol": "vmess",
         "settings": {
             "clients": [
                 {
-                    "id": "b831381d-6324-4d53-ad4f-8cda48b30811",
+                    "id": "c56e2404-5384-47d4-965a-7f8e0144c544",
                     "level": 1,
-                    "alterId": 100
+                    "alterId": 32
                 }
             ]
-        },
-        "streamSettings": {
-            "network": "kcp"
-        },
-        "detour": {
-            "to": "vmess-detour-894997"
         }
     },
     "outbound": {
         "protocol": "freedom",
         "settings": {}
     },
-    "inboundDetour": [
-        {
-            "protocol": "vmess",
-            "port": "10000-10010",
-            "tag": "vmess-detour-894997",
-            "settings": {},
-            "allocate": {
-                "strategy": "random",
-                "concurrency": 5,
-                "refresh": 5
-            },
-            "streamSettings": {
-                "network": "kcp"
-            }
-        }
-    ],
     "outboundDetour": [
         {
             "protocol": "blackhole",
@@ -78,20 +56,18 @@
             ]
         }
     },
-    "transport": {
-       "tcpSettings": {
-           "connectionReuse": true
-        },
-       "kcpSettings": {
-           "mtu": 1350,
-           "tti": 10,
-           "uplinkCapacity": 5,
-           "downlinkCapacity": 20,
-           "congestion": false,
-           "readBufferSize": 1,
-           "writeBufferSize": 1,
-           "header": {
-                "type": "wechat-video"
+    "streamSettings": {
+        "network": "kcp",
+        "kcpSettings": {
+            "mtu": 1350,
+            "tti": 20,
+            "uplinkCapacity": 5,
+            "downlinkCapacity": 100,
+            "congestion": false,
+            "readBufferSize": 1,
+            "writeBufferSize": 1,
+            "header": {
+                "type": "srtp"
             }
         }
     }
